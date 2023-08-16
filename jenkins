@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your source code from version control
+                checkout scm
+            }
+        }
+        
+        stage('Unit Tests') {
+            steps {
+                // Set up your environment, install dependencies, etc.
+                sh 'npm install' // Example: Installing npm dependencies
+                
+                // Run your unit tests
+                sh 'npm test' // Example: Running unit tests using npm
+                
+                // Archive test results for later viewing in Jenkins
+                junit 'git 'https://github.com/LdKishan/Registration-2.git'' // Example: JUnit test report
+            }
+        }
+        
+        // Add more stages for other pipeline steps (e.g., build, deploy, etc.)
+    }
+}
